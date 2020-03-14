@@ -19,10 +19,20 @@ insert into empleado(id, nombre, apellido, cargo, salario, ciudad) values (1, 'P
 insert into empleado(id, nombre, apellido, cargo, salario, ciudad) values (2, 'Juana', 'Gonzalez', 'Gerente', 2000000, 'Bogota');
 
 
+
+insert into empleadol(id,  cargo, salario, ciudad) values (1,  'Vendedor', 1000000, 'Bogota');
+insert into empleadol(id,  cargo, salario, ciudad) values (2,  'Gerente', 2000000, 'Bogota');
+
+
 // registros en Remota
 
 insert into empleado(id, nombre, apellido, cargo, salario, ciudad) values (3, 'Maria', 'Castillo', 'Vendedor', 1000000, 'Medellin');
 insert into empleado(id, nombre, apellido, cargo, salario, ciudad) values (4, 'Juan', 'Garcia', 'Gerente', 2000000, 'Medellin');
+
+
+
+insert into empleador(id, nombre, apellido) values (1, 'Maria', 'Castillo');
+insert into empleador(id, nombre, apellido) values (2, 'Juan', 'Garcia');
 
 
 create extension dblink;
