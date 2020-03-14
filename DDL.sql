@@ -27,11 +27,15 @@ insert into empleado(id, nombre, apellido, cargo, salario, ciudad) values (4, 'J
 
 create extension dblink;
 
-//Fragmentacion
+//Fragmentacion horizontal
 
 
 select empleado_R.* 
-from dblink('dbname=bdlocal port=5432 host=10.28.1.65 password=123456 user = postgres','select * from empleado')
+from dblink('dbname=bdremota port=5432 host=192.168.0.17 user = postgres','select * from empleado')
 as empleado_R(id integer, nombre varchar(50), apellido varchar(50), cargo varchar(50), salario real, ciudad varchar(50))
-UNION select * from empleado;
+UNION select * from empleado
 order by ciudad;
+
+//Fragmentacion vertical
+
+select empleado_R.*, empleadover.*from dblink('dbname=bdlocal port=5432 host=10.28.1.65 password=123456 user=postgres', 'select * from empleadoA')as empleado_R(id integer, cargo varchar(50), salario real, ciudad varchar(50)) inner join empleadover on empleado_R.id = empleadover.id;
