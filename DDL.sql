@@ -49,3 +49,23 @@ order by ciudad;
 //Fragmentacion vertical
 
 select empleado_R.*, empleadover.*from dblink('dbname=bdlocal port=5432 host=10.28.1.65 password=123456 user=postgres', 'select * from empleadoA')as empleado_R(id integer, cargo varchar(50), salario real, ciudad varchar(50)) inner join empleadover on empleado_R.id = empleadover.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
