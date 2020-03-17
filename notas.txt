@@ -1,0 +1,3 @@
+Replicar la tabla libros.
+
+aplicar fragmentacion vertical en la tabla libro.
