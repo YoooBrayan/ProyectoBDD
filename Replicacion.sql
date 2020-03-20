@@ -10,11 +10,11 @@
 
 create role replica REPLICATION LOGIN PASSWORD '123456';
 
-GRANT all on autor to replica;
 
 /* Publicaciones Maestro */
 
 /* Publicacion de autor */
+GRANT all on autor to replica;
 CREATE PUBLICATION public_autor FOR TABLE autor;
 
 
@@ -24,7 +24,9 @@ CREATE PUBLICATION public_libro FOR TABLE libro
 
 
 /* Publicacion de editorial */
-CREATE PUBLICATION public_editorial FOR TABLE editorial
+GRANT all on editorial to replica;
+CREATE PUBLICATION public_editorial FOR TABLE editorial;
+
 
 /* Publicaciones Esclavo */
 
@@ -39,14 +41,34 @@ CREATE PUBLICATION public_editorial FOR TABLE editorial
 
 /* Subscripciones Esclavo */
 
-/* Subscripcion de autor */
+/* Subscripcion de autor  5433*/
 create subscription sub_autor
 connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
 publication public_autor;
+
+
+/* Subscripcion de autor  5434*/
+create subscription subs_autor
+connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
+publication public_autor;
+
+
+/* Subscripcion de editorial 5434*/
+create subscription subs_editorial
+connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
+publication public_editorial;
 
 /* Subscripcion de editorial */
 create subscription sub_libro
 connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
 publication public_libro;
+
+/* Subscripcion de editorial 5434*/
+create subscription subs_libro
+connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
+publication public_libro;
+
+
+
 
 /* Subscripciones Maestro */

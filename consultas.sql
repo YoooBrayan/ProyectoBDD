@@ -4,7 +4,7 @@ create view clientes as
 select identificacion_cliente, fecha_compra from venta GROUP BY identificacion_cliente, fecha_compra;
 
 
-select COUNT(*)
+select COUNT(identificacion_cliente)
 from clientes
 where identificacion_cliente not in(
     select identificacion_cliente from venta 

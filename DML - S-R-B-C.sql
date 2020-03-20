@@ -98,22 +98,22 @@
         (46, 'Libreria Riohacha', 6, 21),
         (47, 'Libreria Riohacha', 7, 9),
         (48, 'Libreria Riohacha', 8, 11),
-        (17, 'Libreria Barranquilla', 1, 23),
-        (33, 'Libreria Barranquilla', 2, 9),
-        (34, 'Libreria Barranquilla', 3, 8),
-        (35, 'Libreria Barranquilla', 4, 7),
-        (36, 'Libreria Barranquilla', 5, 7),
-        (37, 'Libreria Barranquilla', 6, 4),
-        (38, 'Libreria Barranquilla', 7, 15),
-        (39, 'Libreria Barranquilla', 8, 15),
-        (41, 'Libreria Cartagena', 1, 14),
-        (42, 'Libreria Cartagena', 2, 14),
-        (43, 'Libreria Cartagena', 3, 12),
-        (44, 'Libreria Cartagena', 4, 8),
-        (45, 'Libreria Cartagena', 5, 12),
-        (46, 'Libreria Cartagena', 6, 11),
-        (47, 'Libreria Cartagena', 7, 16),
-        (48, 'Libreria Cartagena', 8, 16);
+        (49, 'Libreria Barranquilla', 1, 23),
+        (51, 'Libreria Barranquilla', 2, 9),
+        (52, 'Libreria Barranquilla', 3, 8),
+        (53, 'Libreria Barranquilla', 4, 7),
+        (54, 'Libreria Barranquilla', 5, 7),
+        (55, 'Libreria Barranquilla', 6, 4),
+        (56, 'Libreria Barranquilla', 7, 15),
+        (57, 'Libreria Barranquilla', 8, 15),
+        (58, 'Libreria Cartagena', 1, 14),
+        (59, 'Libreria Cartagena', 2, 14),
+        (61, 'Libreria Cartagena', 3, 12),
+        (62, 'Libreria Cartagena', 4, 8),
+        (63, 'Libreria Cartagena', 5, 12),
+        (64, 'Libreria Cartagena', 6, 11),
+        (65, 'Libreria Cartagena', 7, 16),
+        (66, 'Libreria Cartagena', 8, 16);
         
 
     /* Insercion  de datos en la tabla cliente  Replicar*/
@@ -144,13 +144,15 @@
 
 
     insert into venta VALUES
-        (1, 17, 1054, '2019-12-03'),
-        (2, 18, 1055),
-        (3, 19, 1056),
-        (4, 30, 1057),
-        (5, 31, 1058),
-        (1, 17, 1059, '2019-12-03'),
-        (2, 18, 1061),
-        (3, 19, 1062),
-        (4, 30, 1054),
-        (5, 31, 1058);
+        (1, 33, 1054, '2019-12-03'),
+        (6, 36, 1059, '2019-12-14');
+
+    insert into venta VALUES
+        (2, 48, 1055),
+        (3, 38, 1056),
+        (4, 42, 1057),
+        (5, 41, 1058),
+        (7, 37, 1061),
+        (8, 33, 1062),
+        (9, 48, 1054),
+        (11, 42, 1058);

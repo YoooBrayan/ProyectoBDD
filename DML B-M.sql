@@ -49,7 +49,7 @@
     /* Insercion  de datos en la tabla Autor*/
 
     insert into autor values 
-        (1, 'Mario Mendoza', 'MM@gmai.com', 1),
+        (7, 'Dante', 'dante@gmai.com', 1),
         (2, 'William Ospina', 'WO@gmai.com', 1),
         (3, 'Renán Vega', 'RV@gmai.com', 1),
         (4, 'Soledad Acosta', 'SA@gmai.com', 2),
@@ -118,7 +118,9 @@
 
 
     insert into venta VALUES
-        (1, 1, 1044),
+        (1, 1, 1044, '2019-12-12');
+        
+    insert into venta VALUES
         (2, 2, 1044),
         (3, 3, 1045),
         (4, 9, 1048),
