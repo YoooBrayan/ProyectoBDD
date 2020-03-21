@@ -78,6 +78,6 @@ UNION
 select s.nombre as sucursal, e.nombre as editorial, COUNT(e.codigo) as total
 FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
 where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
-GROUP by e.codigo, e.nombre, s.nombre
+GROUP by e.codigo, editorial, sucursal
 order by sucursal, total desc;
 
