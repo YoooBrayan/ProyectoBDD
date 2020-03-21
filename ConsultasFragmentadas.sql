@@ -194,3 +194,27 @@ from libro l join sucursal_libro sl on l.codigo = sl.codigo_libro join venta v o
 where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
 GROUP BY l.titulo, sucursal
 order by sucursal, vendidos desc;
+
+
+/* 5.Datos de los empleados a   nivel nacional organizados por sucursal y   por cargo de tal forma que sea posible identificar el empleado con mayor y menor antigüedad. */
+
+select empleadosA_PC.*
+from dblink('dbname=libreria port=5433 host=127.0.0.1 password=123 user=postgres',
+'select e.codigo, e.documento, e.nombre, e.salario, e.fecha_de_nacimiento, e.fecha_de_contratacion, c.cargo, s.nombre as sucursal
+from empleado e join cargo c on e.codigo_cargo = c.codigo join sucursal s on e.nombre_sucursal = s.nombre 
+GROUP BY e.codigo, s.nombre, c.cargo
+ORDER BY sucursal, fecha_de_contratacion ASC'
+) as empleadosA_PC (codigo integer, documento integer, nombre varchar(30), salario real, fecha_de_nacimiento date, fecha_de_contratacion date, cargo varchar(40), sucursal varchar(50))
+UNION
+select empleadosA_SRBC.*
+from dblink('dbname=libreria port=5434 host=127.0.0.1 password=123 user=postgres',
+'select e.codigo, e.documento, e.nombre, e.salario, e.fecha_de_nacimiento, e.fecha_de_contratacion, c.cargo, s.nombre as sucursal
+from empleado e join cargo c on e.codigo_cargo = c.codigo join sucursal s on e.nombre_sucursal = s.nombre 
+GROUP BY e.codigo, s.nombre, c.cargo
+ORDER BY sucursal, fecha_de_contratacion ASC'
+) as empleadosA_SRBC (codigo integer, documento integer, nombre varchar(30), salario real, fecha_de_nacimiento date, fecha_de_contratacion date, cargo varchar(40), sucursal varchar(50))
+UNION
+select e.codigo, e.documento, e.nombre, e.salario, e.fecha_de_nacimiento, e.fecha_de_contratacion, c.cargo, s.nombre
+from empleado e join cargo c on e.codigo_cargo = c.codigo join sucursal s on e.nombre_sucursal = s.nombre 
+GROUP BY e.codigo, s.nombre, c.cargo
+ORDER BY sucursal, fecha_de_contratacion ASC;
