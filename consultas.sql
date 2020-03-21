@@ -38,11 +38,11 @@ GROUP by e.codigo, e.nombre
  order by total desc;
 
 /* 2.Consolidado mensual y anual de la editorial de la cual se han vendido más libros en cada sucursal */
-select s.nombre, e.codigo, e.nombre, COUNT(e.codigo) as total
+select s.nombre, e.nombre, COUNT(e.codigo) as total
 FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
 where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
 GROUP by e.codigo, e.nombre, s.nombre
- order by s.nombre;
+order by s.nombre;
 
 /*select e.codigo, e.nombre, COUNT(e.codigo) as total
 from venta v join sucursal_libro sl on v.codigo_sucursal_libro = sl.codigo join libro l on sl.codigo_libro = l.codigo join editorial e on e.codigo = l.editorial
@@ -57,15 +57,14 @@ from venta v join sucursal_libro sl on v.codigo_sucursal_libro = sl.codigo join 
 
  /* 3. Datos de los clientes nuevos. Estos datos organizados por sucursal en un mes particular. */
 
-
-select c.identificacion, c.nombre, ci.ciudad
+select c.identificacion, c.nombre, s.nombre
 from cliente c INNER JOIN ciudad ci on c.codigo_ciudad_residencia = ci.codigo INNER JOIN venta v on v.identificacion_cliente = c.identificacion JOIN sucursal_libro sl on sl.codigo = v.codigo_sucursal_libro JOIN sucursal s on s.nombre = sl.nombre_sucursal
 where identificacion not in(
     select identificacion from cliente c join venta v on v.identificacion_cliente = c.identificacion 
     where fecha_compra < '2020-03-01'
 )
-and fecha_compra BETWEEN '2020-03-01' and '2020-03-31' and s.nombre = 'Libreria Bogotá'
-GROUP by identificacion, ci.ciudad;
+and fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
+order by s.nombre;
 
 /* 4.Libros más comprados en un mes particular a nivel nacional por cada sucursal. */
 
