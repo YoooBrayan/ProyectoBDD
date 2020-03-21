@@ -69,11 +69,11 @@ order by s.nombre;
 /* 4.Libros más comprados en un mes particular a nivel nacional por cada sucursal. */
 
 /* Libros más comprados a nivel nacional */
-select l.titulo, COUNT(l.titulo) as Vendidos
+select s.nombre as sucursal, l.titulo, COUNT(l.titulo) as Vendidos
 from libro l join sucursal_libro sl on l.codigo = sl.codigo_libro join venta v on v.codigo_sucursal_libro = sl.codigo join sucursal s on s.nombre = sl.nombre_sucursal
 where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
-GROUP BY l.titulo
-order by vendidos desc;
+GROUP BY l.titulo, sucursal
+order by sucursal, vendidos desc;
 
 /* Libros más comprados por sucursal */
 select l.titulo, COUNT(l.titulo) as Vendidos
