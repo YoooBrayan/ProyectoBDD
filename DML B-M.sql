@@ -49,7 +49,7 @@
     /* Insercion  de datos en la tabla Autor*/
 
     insert into autor values 
-        (7, 'Dante', 'dante@gmai.com', 1),
+        (1, 'Mario Mendoza', 'MM@gmai.com', 1),
         (2, 'William Ospina', 'WO@gmai.com', 1),
         (3, 'Renán Vega', 'RV@gmai.com', 1),
         (4, 'Soledad Acosta', 'SA@gmai.com', 2),
@@ -96,13 +96,13 @@
 
     /* Insercion  de datos en la tabla cliente */
 
-    insert into cliente values 
-        (1044, 'Pepito', 'pepito@gmail.com', 1),
-        (1045, 'Claudia', 'Claudia@gmail.com', 1),
-        (1046, 'Sofia', 'sofia@gmail.com', 2),
-        (1047, 'Felipe', 'felipe@gmail.com', 2),
-        (1048, 'Karen', 'karen@gmail.com', 2),
-        (1049, 'Juana', 'juana@gmail.com', 1);
+    insert into clienteP values 
+        (2044, 'Pepito', 'pepito@gmail.com', 1),
+        (2045, 'Claudia', 'Claudia@gmail.com', 1),
+        (2046, 'Sofia', 'sofia@gmail.com', 2),
+        (2047, 'Felipe', 'felipe@gmail.com', 2),
+        (2048, 'Karen', 'karen@gmail.com', 2),
+        (2049, 'Juana', 'juana@gmail.com', 1);
 
     /* Insercion  de datos en la tabla telefono_cliente */
 

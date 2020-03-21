@@ -29,13 +29,20 @@ GROUP by identificacion, fecha_compra
 order by fecha_compra limit 1*/
 
 
-/* 2.Consolidado mensual y   anual de la editorial de la cual se han vendido más libros en cada sucursal */
+/* 2.Consolidado mensual y anual de la editorial de la cual se han vendido más libros en cada sucursal */
 
 select e.codigo, e.nombre, COUNT(e.codigo) as total
 FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
 where fecha_compra BETWEEN '2020-03-01' and '2020-03-31' and s.nombre = 'Libreria Medellin'
 GROUP by e.codigo, e.nombre
  order by total desc;
+
+/* 2.Consolidado mensual y anual de la editorial de la cual se han vendido más libros en cada sucursal */
+select s.nombre, e.codigo, e.nombre, COUNT(e.codigo) as total
+FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
+where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
+GROUP by e.codigo, e.nombre, s.nombre
+ order by s.nombre;
 
 /*select e.codigo, e.nombre, COUNT(e.codigo) as total
 from venta v join sucursal_libro sl on v.codigo_sucursal_libro = sl.codigo join libro l on sl.codigo_libro = l.codigo join editorial e on e.codigo = l.editorial

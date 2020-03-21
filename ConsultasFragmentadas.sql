@@ -53,3 +53,31 @@ from dblink('dbname=libreria port=5434 host=127.0.0.1 password=123 user=postgres
 )
 and fecha_compra BETWEEN ''2020-03-01'' and ''2020-03-31'' ')
 as clientes_SRBC (c3 integer)) as n3;
+
+
+/* 2.Consolidado mensual y   anual de la editorial de la cual se han vendido más libros en cada sucursal */
+
+select editoriales_PC.*
+from dblink('dbname=libreria port=5433 host=127.0.0.1 password=123 user=postgres',
+'select s.nombre as sucursal, e.nombre as editorial, COUNT(e.codigo) as total
+FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
+where fecha_compra BETWEEN ''2020-03-01'' and ''2020-03-31''
+GROUP by e.codigo, e.nombre, s.nombre
+order by sucursal'
+) as editoriales_PC (sucursal varchar(50), editorial varchar(60), total integer)
+UNION
+select editoriales_SRBC.*
+from dblink('dbname=libreria port=5434 host=127.0.0.1 password=123 user=postgres',
+'select s.nombre as sucursal, e.nombre as editorial, COUNT(e.codigo) as total
+FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
+where fecha_compra BETWEEN ''2020-03-01'' and ''2020-03-31''
+GROUP by e.codigo, e.nombre, s.nombre
+order by sucursal'
+) as editoriales_SRBC (sucursal varchar(50), editorial varchar(60), total integer)
+UNION
+select s.nombre as sucursal, e.nombre as editorial, COUNT(e.codigo) as total
+FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
+where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
+GROUP by e.codigo, e.nombre, s.nombre
+order by sucursal, total desc;
+
