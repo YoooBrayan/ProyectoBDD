@@ -1,4 +1,4 @@
-/* 1.Consolidado mensual de la cantidad de clientes nuevos a nivel nacional. */
+﻿/* 1.Consolidado mensual de la cantidad de clientes nuevos a nivel nacional. */
 
 create view clientes as
 select identificacion_cliente, fecha_compra from venta GROUP BY identificacion_cliente, fecha_compra;
@@ -12,30 +12,14 @@ where identificacion_cliente not in(
 )
 and fecha_compra BETWEEN '2020-03-01' and '2020-03-31';
 
-/*select COUNT(identificacion)
-from cliente c INNER JOIN ciudad ci on c.codigo_ciudad_residencia = ci.codigo INNER JOIN venta v on v.identificacion_cliente = c.identificacion
-where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
-GROUP BY identificacion, ciudad, fecha_compra
-order by fecha_compra
-limit 1;
-
-select identificacion from (select identificacion, fecha_compra from cliente c join venta v on v.identificacion_cliente = c.identificacion order by fecha_compra limit 1) as nuevo
-GROUP by idetif
-
-
-select identificacion, fecha_compra from cliente c join venta v on v.identificacion_cliente = c.identificacion
-where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
-GROUP by identificacion, fecha_compra
-order by fecha_compra limit 1*/
-
 
 /* 2.Consolidado mensual y anual de la editorial de la cual se han vendido más libros en cada sucursal */
 
-select e.codigo, e.nombre, COUNT(e.codigo) as total
+select s.nombre, e.codigo, e.nombre, COUNT(e.codigo) as total
 FROM editorial e INNER JOIN libro l on e.codigo = l.editorial INNER JOIN sucursal_libro sl on l.codigo = sl.codigo_libro INNER JOIN sucursal s on sl.nombre_sucursal = s.nombre INNER JOIN venta v on sl.codigo = v.codigo_sucursal_libro 
-where fecha_compra BETWEEN '2020-03-01' and '2020-03-31' and s.nombre = 'Libreria Medellin'
-GROUP by e.codigo, e.nombre
- order by total desc;
+where fecha_compra BETWEEN '2020-03-01' and '2020-03-31'
+GROUP by e.codigo, e.nombre, s.nombre
+order by s.nombre;
 
 /* 2.Consolidado mensual y anual de la editorial de la cual se han vendido más libros en cada sucursal */
 select s.nombre, e.nombre, COUNT(e.codigo) as total

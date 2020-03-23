@@ -27,9 +27,17 @@ CREATE PUBLICATION public_libro FOR TABLE libro
 GRANT all on editorial to replica;
 CREATE PUBLICATION public_editorial FOR TABLE editorial;
 
+/* Publicacion de cliente */
+GRANT all on cliente to replica;
+CREATE PUBLICATION public_cliente FOR TABLE cliente;
 
-/* Publicaciones Esclavo */
+/* Publicaciones Esclavo 5433*/
+GRANT all on cliente to replica;
+CREATE PUBLICATION public_cliente FOR TABLE cliente;
 
+/* Publicaciones Esclavo 5434*/
+GRANT all on cliente to replica;
+CREATE PUBLICATION public_cliente FOR TABLE cliente;
 
 
 
@@ -58,17 +66,45 @@ create subscription subs_editorial
 connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
 publication public_editorial;
 
-/* Subscripcion de editorial */
+/* Subscripcion de libro */
 create subscription sub_libro
 connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
 publication public_libro;
 
-/* Subscripcion de editorial 5434*/
+/* Subscripcion de libro 5434*/
 create subscription subs_libro
 connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
 publication public_libro;
 
+/* Subscripcion de cliente 5433 a 5432 */
+create subscription sub_cliente
+connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
+publication public_cliente;
+
+/* Subscripcion de cliente 5434 a 5432*/
+create subscription subs_cliente
+connection 'host=127.0.0.1 port=5432 user=replica dbname=libreria password=123456'
+publication public_cliente;
 
 
+/* Subscripcion de cliente 5434 a 5433*/
+create subscription subsc_cliente
+connection 'host=127.0.0.1 port=5433 user=replica dbname=libreria password=123456'
+publication public_cliente;
+
+/* Subscripcion de cliente 5433 a 5434*/
+create subscription subscr_cliente
+connection 'host=127.0.0.1 port=5434 user=replica dbname=libreria password=123456'
+publication public_cliente;
 
 /* Subscripciones Maestro */
+
+/* Subscripcion de cliente 5432 a 5433*/
+create subscription subscri_cliente
+connection 'host=127.0.0.1 port=5433 user=replica dbname=libreria password=123456'
+publication public_cliente;
+
+/* Subscripcion de cliente 5432 a 5434*/
+create subscription subscrip_cliente
+connection 'host=127.0.0.1 port=5434 user=replica dbname=libreria password=123456'
+publication public_cliente;

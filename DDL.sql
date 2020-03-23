@@ -99,7 +99,7 @@ create table sucursal_libro(
 );
 
 
-create table cliente(
+create table clienteP(
     identificacion int not null,
     nombre varchar(50) not null,
     e_mail varchar(30),
